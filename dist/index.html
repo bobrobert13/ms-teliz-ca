@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="es"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Multiservicios Teliz - Limpieza y Oficina"><title>Multiservicios Teliz - Inicio</title><link rel="icon" type="image/png" href="https://i.ibb.co/d4NY7WDd/image.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script>
+    window.addEventListener('alpine:init', () => {
+      Alpine.store('filters', { open: false, category: '', subcategory: '', search: '' });
+      Alpine.store('budget', {
+        items: JSON.parse(localStorage.getItem('budget_items') || '[]'),
+        discountPercent: 0,
+        get subtotal() { return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0); },
+        get total() { return this.subtotal - (this.subtotal * (this.discountPercent / 100)); },
+        add(item) {
+          const existing = this.items.find(i => i.id === item.id);
+          if (existing) { existing.quantity += item.quantity; } else { this.items.push(item); }
+          this._persist();
+        },
+        remove(id) { this.items = this.items.filter(i => i.id !== id); this._persist(); },
+        clear() { this.items = []; this._persist(); },
+        _persist() { localStorage.setItem('budget_items', JSON.stringify(this.items)); }
+      });
+    });
+  </script><link rel="stylesheet" href="/_astro/catalog.CAu0TEFd.css"></head> <body class="font-sans bg-white text-navy antialiased">  <main class="min-h-screen flex items-center justify-center bg-navy"> <a href="/catalog" class="px-8 py-4 bg-mustard text-navy font-bold text-xl rounded-xl hover:bg-yellow-400 transition shadow-lg">
+Ir a DEMO
+</a> </main>  </body></html>

@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PreHeader from '../../components/layout/PreHeader.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import WhatsAppFloat from '../../components/layout/WhatsAppFloat.astro';
+import MapSection from '../../components/sections/MapSection.astro';
+import PreFooter from '../../components/sections/PreFooter.astro';
+import { products } from '../../data/products';
+import { WHATSAPP_URL, PHONE } from '../../config/constants';
+
+export function getStaticPaths() {
+  return products.map(p => ({ params: { id: p.id.toString() } }));
+}
+
+const { id } = Astro.params;
+const product = products.find(p => p.id === Number(id));
+
+if (!product) {
+  return Astro.redirect('/catalog');
+}
+
+const message = encodeURIComponent(
+`🏪 *CONSULTA DE PRODUCTO*\n` +
+`━━━━━━━━━━━━━━━━━━━━\n\n` +
+`📦 *Producto:* ${product.name}\n\n` +
+`💰 *Precio:* $${product.price.toFixed(2)}\n\n` +
+`📂 *Categoría:* ${product.categoryLabel}\n\n` +
+`📝 *Descripción:*\n${product.description}\n\n` +
+`📋 *Especificaciones:*\n${product.specs.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+`━━━━━━━━━━━━━━━━━━━━\n\n` +
+`📍 *Ubicación:* El Tigre, Anzoátegui\n` +
+`📱 *Teléfono:* +58 412-8550056\n\n` +
+`¡Quedo atento a su consulta! 😊`
+);
+---
+
+<BaseLayout title={`${product.name} - Multiservicios Teliz`}>
+  <PreHeader />
+  <Header />
+
+  <main class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-6">
+        <ol class="flex items-center gap-2 text-sm">
+          <li><a href="/" class="text-gray-500 hover:text-mustard">Inicio</a></li>
+          <li class="text-gray-400">/</li>
+          <li><a href="/catalog" class="text-gray-500 hover:text-mustard">Catálogo</a></li>
+          <li class="text-gray-400">/</li>
+          <li class="text-navy font-medium">{product.name}</li>
+        </ol>
+      </nav>
+
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Gallery -->
+        <div class="space-y-4">
+          <div class="aspect-square rounded-xl overflow-hidden bg-gray-100">
+            <img src={product.image} alt={product.name} class="w-full h-full object-cover" />
+          </div>
+          {product.images && product.images.length > 1 && (
+            <div class="grid grid-cols-4 gap-2">
+              {product.images.map((img, i) => (
+                <button class={`aspect-square rounded-lg overflow-hidden border-2 ${i === 0 ? 'border-mustard' : 'border-transparent'} hover:border-mustard/50 transition`}>
+                  <img src={img} alt={`${product.name} ${i + 1}`} class="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Info -->
+        <div class="space-y-6">
+          <div>
+            <p class="text-sm text-gray-500 mb-1">{product.categoryLabel}</p>
+            <h1 class="text-2xl sm:text-3xl font-bold text-navy">{product.name}</h1>
+            <p class="text-3xl sm:text-4xl font-extrabold text-mustard mt-2">${product.price.toFixed(2)}</p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-navy mb-2">Descripción</h3>
+            <p class="text-gray-600">{product.description}</p>
+          </div>
+
+          {product.specs && product.specs.length > 0 && (
+            <div>
+              <h3 class="font-semibold text-navy mb-2">Especificaciones</h3>
+              <ul class="space-y-1">
+                {product.specs.map(spec => (
+                  <li class="flex items-center gap-2 text-gray-600">
+                    <span class="w-1.5 h-1.5 bg-mustard rounded-full"></span>
+                    {spec}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Quantity & Actions -->
+          <div class="space-y-4 pt-4" x-data="{ quantity: 1 }">
+            <div class="flex items-center gap-4">
+              <span class="font-medium text-navy">Cantidad:</span>
+              <div class="flex items-center gap-2">
+                <button @click="quantity > 1 ? quantity-- : null" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                </button>
+                <span x-text="quantity" class="w-12 text-center font-semibold text-lg">1</span>
+                <button @click="quantity++" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button
+                @click={`addToBudget(${product.id}, quantity)`}
+                class="flex-1 py-3 px-6 bg-navy text-white font-bold rounded-full hover:bg-navy/90 transition shadow-lg"
+              >
+                Agregar al presupuesto
+              </button>
+              <a
+                href={`${WHATSAPP_URL}${PHONE}?text=${message}`}
+                target="_blank"
+                class="flex-1 py-3 px-6 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition shadow-lg flex items-center justify-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <MapSection />
+  <PreFooter />
+  <Footer />
+  <WhatsAppFloat />
+
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script is:inline>
+    function addToBudget(productId, quantity) {
+      const products = [{"id":1,"name":"Cloro Galón 4L Premium","price":4.50,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1585421514738-01798e348b17?w=600&q=80"},{"id":2,"name":"Desengrasante Industrial 5L","price":8.99,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":31,"name":"Resma Papel Bond Carta 500h","price":6.99,"cat":"oficina","sub":"papel","categoryLabel":"Oficina > Papel","image":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"},{"id":49,"name":"Grapadora Metálica 50 hojas","price":8.75,"cat":"oficina","sub":"accesorios","categoryLabel":"Oficina > Accesorios","image":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"},{"id":66,"name":"Jabón Líquido Manos 1L","price":3.20,"cat":"higiene","sub":"jabon","categoryLabel":"Higiene > Jabón","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":70,"name":"Papel Higiénico Doméstico 4 rollos","price":2.50,"cat":"higiene","sub":"papel","categoryLabel":"Higiene > Papel","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":3,"name":"Detergente Líquido 3L","price":5.99,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1583947215259-38f5ab7be1dd?w=600&q=80"},{"id":4,"name":"Escobillón Profesional 60cm","price":12.50,"cat":"limpieza","sub":"implementos","categoryLabel":"Limpieza > Implementos","image":"https://images.unsplash.com/photo-1584286595398-a0d65d4c4f5f?w=600&q=80"},{"id":5,"name":"Trapeador Microfibra 60cm","price":9.99,"cat":"limpieza","sub":"implementos","categoryLabel":"Limpieza > Implementos","image":"https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&q=80"},{"id":32,"name":"Cuaderno Ejecutivo 100 Hojas","price":4.50,"cat":"oficina","sub":"papel","categoryLabel":"Oficina > Papel","image":"https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=600&q=80"},{"id":50,"name":"Perforadora 2 Huecos","price":7.25,"cat":"oficina","sub":"accesorios","categoryLabel":"Oficina > Accesorios","image":"https://images.unsplash.com/photo-1588072432836-e10032724350?w=600&q=80"},{"id":67,"name":"Alcohol Isopropílico 1L","price":4.75,"cat":"higiene","sub":"jabon","categoryLabel":"Higiene > Jabón","image":"https://images.unsplash.com/photo-1583947215259-38f5ab7be1dd?w=600&q=80"},{"id":71,"name":"Toallas de Papel 2 playos 100u","price":3.99,"cat":"higiene","sub":"toallas","categoryLabel":"Higiene > Toallas","image":"https://images.unsplash.com/photo-1584286595398-a0d65d4c4f5f?w=600&q=80"}];
+      const product = products.find(p => p.id === productId);
+      if (product && window.Alpine) {
+        Alpine.store('budget').add({...product, quantity: quantity});
+        alert('✓ ' + product.name + ' x' + quantity + ' añadido al presupuesto');
+      }
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  categoryLabel: string;
+}
+
+const { id, name, price, image, categoryLabel } = Astro.props;
+---
+
+<article class="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+  <a href={`/product/${id}`} class="block">
+    <div class="aspect-square overflow-hidden bg-gray-100">
+      <img src={image} alt={name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+    </div>
+    <div class="p-4">
+      <p class="text-xs text-gray-500 mb-1">{categoryLabel}</p>
+      <h3 class="font-semibold text-navy line-clamp-2 min-h-[2.5rem]">{name}</h3>
+      <p class="text-mustard font-bold mt-2">${price.toFixed(2)}</p>
+    </div>
+  </a>
+  <div class="px-4 pb-4">
+    <button
+      @click={`addToBudget(${id})`}
+      class="w-full py-2.5 px-4 bg-navy text-white font-medium rounded-lg hover:bg-navy/90 transition-colors text-sm"
+    >
+      Agregar al presupuesto
+    </button>
+  </div>
+</article>
+
+<script is:inline>
+  function addToBudget(productId) {
+    const products = [{"id":1,"name":"Cloro Galón 4L Premium","price":4.50,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1585421514738-01798e348b17?w=600&q=80"},{"id":2,"name":"Desengrasante Industrial 5L","price":8.99,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":31,"name":"Resma Papel Bond Carta 500h","price":6.99,"cat":"oficina","sub":"papel","categoryLabel":"Oficina > Papel","image":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"},{"id":49,"name":"Grapadora Metálica 50 hojas","price":8.75,"cat":"oficina","sub":"accesorios","categoryLabel":"Oficina > Accesorios","image":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"},{"id":66,"name":"Jabón Líquido Manos 1L","price":3.20,"cat":"higiene","sub":"jabon","categoryLabel":"Higiene > Jabón","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":70,"name":"Papel Higiénico Doméstico 4 rollos","price":2.50,"cat":"higiene","sub":"papel","categoryLabel":"Higiene > Papel","image":"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},{"id":3,"name":"Detergente Líquido 3L","price":5.99,"cat":"limpieza","sub":"quimicos","categoryLabel":"Limpieza > Químicos","image":"https://images.unsplash.com/photo-1583947215259-38f5ab7be1dd?w=600&q=80"},{"id":4,"name":"Escobillón Profesional 60cm","price":12.50,"cat":"limpieza","sub":"implementos","categoryLabel":"Limpieza > Implementos","image":"https://images.unsplash.com/photo-1584286595398-a0d65d4c4f5f?w=600&q=80"},{"id":5,"name":"Trapeador Microfibra 60cm","price":9.99,"cat":"limpieza","sub":"implementos","categoryLabel":"Limpieza > Implementos","image":"https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&q=80"},{"id":32,"name":"Cuaderno Ejecutivo 100 Hojas","price":4.50,"cat":"oficina","sub":"papel","categoryLabel":"Oficina > Papel","image":"https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=600&q=80"},{"id":50,"name":"Perforadora 2 Huecos","price":7.25,"cat":"oficina","sub":"accesorios","categoryLabel":"Oficina > Accesorios","image":"https://images.unsplash.com/photo-1588072432836-e10032724350?w=600&q=80"},{"id":67,"name":"Alcohol Isopropílico 1L","price":4.75,"cat":"higiene","sub":"jabon","categoryLabel":"Higiene > Jabón","image":"https://images.unsplash.com/photo-1583947215259-38f5ab7be1dd?w=600&q=80"},{"id":71,"name":"Toallas de Papel 2 playos 100u","price":3.99,"cat":"higiene","sub":"toallas","categoryLabel":"Higiene > Toallas","image":"https://images.unsplash.com/photo-1584286595398-a0d65d4c4f5f?w=600&q=80"}];
+    const product = products.find(p => p.id === productId);
+    if (product && window.Alpine) {
+      Alpine.store('budget').add({...product, quantity: 1});
+      alert('✓ ' + product.name + ' añadido al presupuesto');
+    }
+  }
+</script>

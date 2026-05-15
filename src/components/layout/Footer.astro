@@ -1,0 +1,21 @@
+---
+import { BUSINESS_NAME, WHATSAPP_URL, PHONE } from '../../config/constants';
+---
+
+<footer class="bg-navy py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="https://i.ibb.co/d4NY7WDd/image.png" alt={BUSINESS_NAME} class="h-8 w-auto" />
+        <span class="font-bold text-white">{BUSINESS_NAME}</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href={WHATSAPP_URL + PHONE} target="_blank" class="text-gray-400 hover:text-white transition text-sm">Contacto</a>
+        <a href="/catalog" class="text-gray-400 hover:text-white transition text-sm">Catálogo</a>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 pt-8 text-center">
+      <p class="text-sm text-gray-400">&copy; 2024 {BUSINESS_NAME} C.A. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
