@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto - Multiservicios Teliz C.A.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            mustard: { DEFAULT: '#F6AA1C', 50: '#FEF3DB', 100: '#FDE7B5', 200: '#FCD68E', 300: '#FBBF5A', 400: '#F9A832', 500: '#F6AA1C', 600: '#D48F0F', 700: '#A8710B', 800: '#7D5508', 900: '#5C4006' },
+            navy: { DEFAULT: '#0B2B46', 50: '#E8EDF2', 100: '#C5D1DD', 200: '#9FB2C5', 300: '#7993AD', 400: '#5A7A9A', 500: '#0B2B46', 600: '#092338', 700: '#071A2A', 800: '#05121D', 900: '#030910' },
+            slate: { DEFAULT: '#54565B', 50: '#EAEBEC', 100: '#C9CACB', 200: '#A8A9AB', 300: '#87888A', 400: '#6B6C70', 500: '#54565B', 600: '#46474B', 700: '#38383B', 800: '#2A2A2C', 900: '#1C1C1D' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>[x-cloak] { display: none !important; }</style>
+</head>
+<body class="font-sans bg-gray-50 text-navy antialiased" x-data="budget()">
+
+  <!-- PRE-HEADER - Info bar -->
+  <div class="bg-slate text-white text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2">
+      <div class="flex items-center justify-between gap-4">
+        <div class="hidden sm:block"></div>
+        <div class="flex items-center gap-3 sm:gap-6">
+          <div class="hidden md:flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-gray-300">Lun-Mar:</span>
+            <span class="font-medium">8:00 AM - 12:00 AM</span>
+          </div>
+          <div class="hidden sm:block text-gray-600">|</div>
+          <div class="flex md:hidden items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="font-medium">8AM-12AM</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <a href="https://wa.me/584128550056" target="_blank" class="font-medium hover:text-green-400 transition">+58 412-8550056</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-navy shadow-sm sticky top-0 z-50" x-data>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo -->
+        <a href="ecommerce-home.html" class="flex items-center gap-3">
+          <img src="https://i.ibb.co/d4NY7WDd/image.png" alt="Multiservicios Teliz" class="h-10 sm:h-12 w-auto object-contain">
+          <div class="hidden sm:block">
+            <span class="font-bold text-lg text-white">Multiservicios</span>
+            <span class="font-bold text-lg text-mustard"> Teliz</span>
+            <p class="text-xs text-gray-300 -mt-1">Limpieza y Oficina</p>
+          </div>
+        </a>
+
+        <!-- Desktop Nav: Products Dropdown + Search -->
+        <div class="hidden lg:flex items-center flex-1 gap-6">
+          <!-- Products Dropdown -->
+          <div class="relative" x-data="{ open: false }" @click.away="open = false" @scroll.window="open = false">
+            <button @click="open = !open" class="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white font-medium transition" :class="open ? 'bg-white/20' : ''">
+              <span>Productos</span>
+              <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div x-show="open" x-transition class="absolute top-full left-0 mt-2 w-[600px] bg-white rounded-2xl shadow-2xl overflow-hidden z-50" @click="open = false">
+              <div class="grid grid-cols-3 divide-x divide-gray-100">
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-mustard/10 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                    </span>
+                    Limpieza
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=limpieza&sub=quimicos" class="text-slate hover:text-mustard text-sm block py-1">Químicos y Desinfectantes</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=implementos" class="text-slate hover:text-mustard text-sm block py-1">Implementos de Aseo</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=residuos" class="text-slate hover:text-mustard text-sm block py-1">Manejo de Residuos</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=automotriz" class="text-slate hover:text-mustard text-sm block py-1">Cuidado Automotriz</a></li>
+                  </ul>
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-navy/10 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </span>
+                    Oficina
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=oficina&sub=papel" class="text-slate hover:text-mustard text-sm block py-1">Papel y Cuadernos</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=escritura" class="text-slate hover:text-mustard text-sm block py-1">Escritura y Corrección</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=accesorios" class="text-slate hover:text-mustard text-sm block py-1">Accesorios de Escritorio</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=archivo" class="text-slate hover:text-mustard text-sm block py-1">Organización y Archivo</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=embalaje" class="text-slate hover:text-mustard text-sm block py-1">Embalaje y Cintas</a></li>
+                  </ul>
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </span>
+                    Higiene
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=higiene&sub=jabon" class="text-slate hover:text-mustard text-sm block py-1">Jabón Líquido</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=papel" class="text-slate hover:text-mustard text-sm block py-1">Papel Higiénico</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=toallas" class="text-slate hover:text-mustard text-sm block py-1">Toallas de Papel</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=dispensadores" class="text-slate hover:text-mustard text-sm block py-1">Dispensadores</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-5 py-3 flex items-center justify-between">
+                <span class="text-sm text-slate">Ver todas las categorías</span>
+                <a href="catalog.html" class="text-mustard font-semibold text-sm hover:underline">Catálogo completo →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="flex-1 max-w-sm">
+            <div class="relative">
+              <input type="text" placeholder="Buscar productos..." class="w-full pl-10 pr-4 py-2.5 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mustard focus:border-transparent">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-1 sm:gap-2">
+          <a href="presupuesto.html" class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 bg-mustard hover:bg-yellow-400 rounded-full text-navy font-semibold text-xs md:text-sm transition shadow-md hover:shadow-lg">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            <span>Presupuesto</span>
+          </a>
+          <button class="p-2 hover:bg-white/10 rounded-full transition relative" :class="$store.budget.items.length > 0 ? 'text-white' : 'text-white/50'" @click="$store.budget.open = !$store.budget.open">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+            <span x-show="$store.budget.items.length > 0" x-text="$store.budget.items.length" class="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-mustard text-navy text-xs font-bold rounded-full flex items-center justify-center"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm flex-wrap">
+        <a href="ecommerce-home.html" class="text-slate hover:text-navy transition">Inicio</a>
+        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-navy font-medium">Presupuesto</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    
+    <!-- Header -->
+    <div class="mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-navy">Tu Presupuesto</h1>
+      <p class="text-slate mt-1">Revisa los productos seleccionados y ajusta cantidades antes de cotizar.</p>
+    </div>
+
+    <!-- Empty State -->
+    <div x-show="$store.budget.items.length === 0" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-12 text-center">
+      <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      </div>
+      <h2 class="text-lg font-semibold text-navy mb-2">Tu presupuesto está vacío</h2>
+      <p class="text-slate mb-6">Explora nuestro catálogo y añade productos a tu presupuesto.</p>
+      <a href="catalog.html" class="inline-flex items-center gap-2 bg-mustard hover:bg-yellow-400 text-navy font-semibold px-6 py-3 rounded-full transition shadow-md hover:shadow-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        Ver catálogo
+      </a>
+    </div>
+
+    <!-- Budget Content -->
+    <div x-show="$store.budget.items.length > 0" class="space-y-4">
+      
+      <!-- Items List -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-gray-100">
+          <h2 class="font-semibold text-navy">Productos seleccionados</h2>
+        </div>
+        
+        <!-- Item -->
+        <template x-for="(item, index) in $store.budget.items" :key="item.id">
+          <div class="p-4 sm:p-6 border-b border-gray-100 last:border-b-0">
+            <div class="flex gap-4">
+              <!-- Image -->
+              <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+                <img :src="item.image" :alt="item.name" class="w-full h-full object-cover">
+              </div>
+              
+              <!-- Details -->
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between gap-2">
+                  <div class="flex-1">
+                    <p class="text-xs text-slate mb-0.5" x-text="item.categoryLabel"></p>
+                    <h3 class="font-semibold text-navy text-sm sm:text-base line-clamp-2" x-text="item.name"></h3>
+                    <p class="text-mustard font-bold mt-1" x-text="'$' + item.price.toFixed(2) + ' c/u'"></p>
+                  </div>
+                  <!-- Remove button -->
+                  <button @click="$store.budget.removeItem(item.id)" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition flex-shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+                
+                <!-- Quantity & Subtotal -->
+                <div class="flex items-center justify-between mt-3">
+                  <div class="flex items-center gap-2">
+                    <button @click="$store.budget.updateQuantity(item.id, Math.max(1, item.quantity - 1))" class="w-8 h-8 border border-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-50 transition">
+                      <svg class="w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                    </button>
+                    <input type="number" x-model.number="item.quantity" @change="$store.budget.updateQuantity(item.id, item.quantity)" min="1" class="w-14 text-center border border-gray-200 rounded-lg py-1.5 text-navy font-medium focus:outline-none focus:ring-2 focus:ring-mustard">
+                    <button @click="$store.budget.updateQuantity(item.id, item.quantity + 1)" class="w-8 h-8 border border-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-50 transition">
+                      <svg class="w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </button>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs text-slate">Subtotal</p>
+                    <p class="font-bold text-navy" x-text="'$' + (item.price * item.quantity).toFixed(2)"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Summary -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-gray-100">
+          <h2 class="font-semibold text-navy">Resumen del presupuesto</h2>
+        </div>
+        <div class="p-4 sm:p-6 space-y-4">
+          
+          <!-- Subtotal -->
+          <div class="flex justify-between text-sm">
+            <span class="text-slate">Subtotal productos</span>
+            <span class="text-navy font-medium" x-text="'$' + $store.budget.subtotal.toFixed(2)"></span>
+          </div>
+          
+          <!-- Total -->
+          <div class="pt-4 border-t border-gray-100">
+            <div class="flex justify-between items-center">
+              <span class="text-lg font-semibold text-navy">Total</span>
+              <div class="text-right">
+                <p class="text-2xl font-bold text-navy" x-text="'$' + $store.budget.total.toFixed(2)"></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Send to WhatsApp -->
+          <div class="pt-4">
+            <button @click="sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-full font-bold text-sm sm:text-base transition shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Enviar presupuesto por WhatsApp
+            </button>
+          </div>
+          
+          <!-- Clear All -->
+          <div class="text-center pt-2">
+            <button @click="$store.budget.clearAll()" class="text-sm text-slate hover:text-red-500 transition">
+              Vaciar presupuesto
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- PRE-FOOTER -->
+  <section class="py-10 sm:py-14 bg-navy">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">¿Necesitas ayuda con tu pedido?</h2>
+        <p class="text-gray-300">Escríbenos por WhatsApp y te cotizamos tu pedido completo.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://wa.me/584128550056" target="_blank" class="inline-flex items-center gap-3 bg-mustard hover:bg-yellow-400 text-navy font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span>Contactar por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate text-gray-300 py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.ibb.co/d4NY7WDd/image.png" alt="Multiservicios Teliz" class="h-10 w-auto object-contain">
+            <div>
+              <span class="font-bold text-lg text-white">Multiservicios</span>
+              <span class="font-bold text-lg text-mustard"> Teliz</span>
+            </div>
+          </div>
+          <p class="text-sm mb-2">Tu aliado en artículos de limpieza y oficina.</p>
+          <p class="text-sm font-semibold text-white">+58 412-8550056</p>
+          <p class="text-sm text-gray-400 mt-1">ventas@multiserviciosteliz.com</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Productos</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="catalog.html?cat=limpieza" class="hover:text-mustard transition">Limpieza</a></li>
+            <li><a href="catalog.html?cat=higiene" class="hover:text-mustard transition">Higiene</a></li>
+            <li><a href="catalog.html?cat=oficina" class="hover:text-mustard transition">Oficina</a></li>
+            <li><a href="catalog.html" class="hover:text-mustard transition">Todos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Horarios</h4>
+          <ul class="space-y-2 text-sm">
+            <li><span class="text-white">Lun - Mar:</span> hasta medianoche</li>
+            <li><span class="text-white">Mié - Dom:</span> hasta 17:30</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Ubicación</h4>
+          <p class="text-sm">10 carrera sur entre 5ta y 7ma Calle Nte<br>El Tigre, Anzoátegui<br>Venezuela</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-8 text-center">
+        <p class="text-sm">&copy; 2024 Multiservicios Teliz C.A. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/584128550056" target="_blank" class="fixed left-3 sm:left-6 bottom-6 sm:bottom-8 z-50 group">
+    <div class="relative">
+      <div class="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-30"></div>
+      <div class="relative w-14 h-14 sm:w-16 sm:h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all transform hover:scale-110">
+        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <script>
+    /**
+     * =============================================================================
+     * ARQUITECTURA DEL SISTEMA DE PRESUPUESTO
+     * =============================================================================
+     * 
+     * FLUJO DE DATOS:
+     * 1. El usuario explora el catálogo (catalog.html)
+     * 2. Al hacer click en "Añadir al presupuesto", el producto se guarda en 
+     *    Alpine.store('budget') - un store global que persiste entre páginas
+     * 3. Desde cualquier página, el usuario puede ver el badge con la cantidad
+     *    de items en el store
+     * 4. La página de presupuesto (presupuesto.html) lee del store y permite
+     *    modificar cantidades, aplicar descuentos y eliminar items
+     * 5. Al enviar, se genera un mensaje formateado para WhatsApp
+     * 
+     * ALPINE.STORE('BUDGET') - Estado Global Compartido:
+     * - items: Array de productos {id, name, price, quantity, image, categoryLabel}
+     * - discountPercent: Porcentaje de descuento (0-100)
+     * - addItem(product): Añade producto al presupuesto
+     * - removeItem(id): Elimina un producto por ID
+     * - updateQuantity(id, qty): Actualiza cantidad de un producto
+     * - applyDiscount(): Calcula el descuento
+     * - clearAll(): Vacía todo el presupuesto
+     * - subtotal: Getter - suma de (precio * cantidad) de todos los items
+     * - discountAmount: Getter - monto del descuento aplicado
+     * - total: Getter - subtotal menos descuento
+     * 
+     * FLUJO DE NAVEGACIÓN:
+     * - Header botón "Presupuesto" → presupuesto.html
+     * - Header botón carrito (nuevo) → presupuesto.html (con badge de cantidad)
+     * - En catálogo: "Añadir al presupuesto" → añade al store y muestra notificación
+     * 
+     * PERSISTENCIA:
+     * - El store usa localStorage para persistir entre sesiones del navegador
+     * - Al recargar, los items se recuperan automáticamente
+     * =============================================================================
+     */
+
+    document.addEventListener('alpine:init', () => {
+      // =============================================================================
+      // ALPINE STORE: Estado global del presupuesto
+      // Compartido entre todas las páginas del sitio
+      // Usa localStorage para persistencia entre sesiones
+      // =============================================================================
+      Alpine.store('budget', {
+        // Estado
+        items: JSON.parse(localStorage.getItem('budget_items') || '[]'),
+        discountPercent: 0,
+        
+        // Getters computados
+        get subtotal() {
+          return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+        },
+        get discountAmount() {
+          return this.subtotal * (this.discountPercent / 100)
+        },
+        get total() {
+          return this.subtotal - this.discountAmount
+        },
+        
+        // Persistir a localStorage cuando cambian los items
+        _persist() {
+          localStorage.setItem('budget_items', JSON.stringify(this.items))
+        },
+        
+        // Añadir producto al presupuesto
+        addItem(product) {
+          const existing = this.items.find(item => item.id === product.id)
+          if (existing) {
+            existing.quantity += 1
+          } else {
+            this.items.push({...product, quantity: 1})
+          }
+          this._persist()
+        },
+        
+        // Eliminar producto por ID
+        removeItem(id) {
+          this.items = this.items.filter(item => item.id !== id)
+          this._persist()
+        },
+        
+        // Actualizar cantidad de un producto
+        updateQuantity(id, quantity) {
+          const item = this.items.find(item => item.id === id)
+          if (item) {
+            item.quantity = Math.max(1, quantity)
+            this._persist()
+          }
+        },
+        
+        // Aplicar descuento (llamado cuando cambia discountPercent)
+        applyDiscount() {
+          // El discountPercent ya está bound al input, solo aseguramos rango válido
+          this.discountPercent = Math.min(100, Math.max(0, this.discountPercent || 0))
+        },
+        
+        // Vaciar todo el presupuesto
+        clearAll() {
+          this.items = []
+          this.discountPercent = 0
+          this._persist()
+        }
+      })
+    })
+
+    /**
+     * Función del presupuesto (página presupuesto.html)
+     * Solo se usa para métodos que requieren acceso al DOM local
+     */
+    function budget() {
+      return {
+        // Genera el mensaje de WhatsApp formateado
+        sendToWhatsApp() {
+          const store = Alpine.store('budget')
+          if (store.items.length === 0) {
+            alert('Tu presupuesto está vacío')
+            return
+          }
+          
+          let message = '🏪 *PRESUPUESTO - Multiservicios Teliz*\n\n'
+          message += '📋 *Productos seleccionados:*\n\n'
+          
+          store.items.forEach((item, index) => {
+            const subtotal = (item.price * item.quantity).toFixed(2)
+            message += `${index + 1}. ${item.name}\n`
+            message += `   Cantidad: ${item.quantity} x $${item.price.toFixed(2)} = $${subtotal}\n\n`
+          })
+          
+          message += '━━━━━━━━━━━━━━━━━━━━\n'
+          message += `💰 *TOTAL: $${store.total.toFixed(2)}*\n`
+          message += '━━━━━━━━━━━━━━━━━━━━\n\n'
+          message += '📍 El Tigre, Anzoátegui\n'
+          message += '📱 +58 412-8550056\n\n'
+          message += '_Este presupuesto tiene validez de 24 horas_'
+          
+          const encoded = encodeURIComponent(message)
+          window.open(`https://wa.me/584128550056?text=${encoded}`, '_blank')
+        }
+      }
+    }
+  </script>
+</body>
+</html>

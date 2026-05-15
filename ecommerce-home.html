@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiservicios Teliz C.A. - Artículos de Limpieza y Oficina</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            mustard: { DEFAULT: '#F6AA1C', 50: '#FEF3DB', 100: '#FDE7B5', 200: '#FCD68E', 300: '#FBBF5A', 400: '#F9A832', 500: '#F6AA1C', 600: '#D48F0F', 700: '#A8710B', 800: '#7D5508', 900: '#5C4006' },
+            navy: { DEFAULT: '#0B2B46', 50: '#E8EDF2', 100: '#C5D1DD', 200: '#9FB2C5', 300: '#7993AD', 400: '#5A7A9A', 500: '#0B2B46', 600: '#092338', 700: '#071A2A', 800: '#05121D', 900: '#030910' },
+            slate: { DEFAULT: '#54565B', 50: '#EAEBEC', 100: '#C9CACB', 200: '#A8A9AB', 300: '#87888A', 400: '#6B6C70', 500: '#54565B', 600: '#46474B', 700: '#38383B', 800: '#2A2A2C', 900: '#1C1C1D' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>[x-cloak] { display: none !important; }</style>
+</head>
+<body class="font-sans bg-white text-navy antialiased">
+
+  <!-- PRE-HEADER - Info bar -->
+  <div class="bg-slate text-white text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Empty left side for balance -->
+        <div class="hidden sm:block"></div>
+        <!-- Right side: schedule + phone -->
+        <div class="flex items-center gap-3 sm:gap-6">
+          <div class="hidden md:flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-gray-300">Lun-Mar:</span>
+            <span class="font-medium">8:00 AM - 12:00 AM</span>
+          </div>
+          <div class="hidden sm:block text-gray-600">|</div>
+          <div class="flex md:hidden items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="font-medium">8AM-12AM</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <a href="https://wa.me/584128550056" target="_blank" class="font-medium hover:text-green-400 transition">+58 412-8550056</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-navy shadow-sm sticky top-0 z-50" x-data="{ productsOpen: false, mobileProductsOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo -->
+        <a href="ecommerce-home.html" class="flex items-center gap-3">
+          <img src="https://i.ibb.co/d4NY7WDd/image.png" alt="Multiservicios Teliz" class="h-10 sm:h-12 w-auto object-contain">
+          <div class="hidden sm:block">
+            <span class="font-bold text-lg text-white">Multiservicios</span>
+            <span class="font-bold text-lg text-mustard"> Teliz</span>
+            <p class="text-xs text-gray-300 -mt-1">Limpieza y Oficina</p>
+          </div>
+        </a>
+
+        <!-- Desktop Nav: Products Dropdown + Search -->
+        <div class="hidden lg:flex items-center flex-1 gap-6">
+          <!-- Products Dropdown -->
+          <div class="relative ml-4" x-data="{ open: false }" @click.away="open = false" @scroll.window="open = false">
+            <button @click="open = !open" class="flex items-center gap-2 px-3 md:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white font-medium transition" :class="open ? 'bg-white/20' : ''">
+              <span>Productos</span>
+              <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2" class="absolute top-full left-0 mt-2 w-[600px] bg-white rounded-2xl shadow-2xl overflow-hidden" @click="open = false">
+              <div class="grid grid-cols-3 divide-x divide-gray-100">
+                <!-- Limpieza -->
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-mustard/10 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                    </span>
+                    Limpieza
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=limpieza&sub=quimicos" class="text-slate hover:text-mustard text-sm block py-1">Químicos y Desinfectantes</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=implementos" class="text-slate hover:text-mustard text-sm block py-1">Implementos de Aseo</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=residuos" class="text-slate hover:text-mustard text-sm block py-1">Manejo de Residuos</a></li>
+                    <li><a href="catalog.html?cat=limpieza&sub=automotriz" class="text-slate hover:text-mustard text-sm block py-1">Cuidado Automotriz</a></li>
+                  </ul>
+                </div>
+                <!-- Oficina -->
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-navy/10 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </span>
+                    Oficina
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=oficina&sub=papel" class="text-slate hover:text-mustard text-sm block py-1">Papel y Cuadernos</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=escritura" class="text-slate hover:text-mustard text-sm block py-1">Escritura y Corrección</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=accesorios" class="text-slate hover:text-mustard text-sm block py-1">Accesorios de Escritorio</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=archivo" class="text-slate hover:text-mustard text-sm block py-1">Organización y Archivo</a></li>
+                    <li><a href="catalog.html?cat=oficina&sub=embalaje" class="text-slate hover:text-mustard text-sm block py-1">Embalaje y Cintas</a></li>
+                  </ul>
+                </div>
+                <!-- Higiene -->
+                <div class="p-5">
+                  <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </span>
+                    Higiene
+                  </h3>
+                  <ul class="space-y-2">
+                    <li><a href="catalog.html?cat=higiene&sub=jabon" class="text-slate hover:text-mustard text-sm block py-1">Jabón Líquido</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=papel" class="text-slate hover:text-mustard text-sm block py-1">Papel Higiénico</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=toallas" class="text-slate hover:text-mustard text-sm block py-1">Toallas de Papel</a></li>
+                    <li><a href="catalog.html?cat=higiene&sub=dispensadores" class="text-slate hover:text-mustard text-sm block py-1">Dispensadores</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-5 py-3 flex items-center justify-between">
+                <span class="text-sm text-slate">Ver todas las categorías</span>
+                <a href="catalog.html" class="text-mustard font-semibold text-sm hover:underline">Catálogo completo →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="flex-1 max-w-md">
+            <div class="relative">
+              <input type="text" placeholder="Buscar productos..." class="w-full pl-10 pr-4 py-2.5 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mustard focus:border-transparent">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-1 sm:gap-2">
+          <!-- Presupuesto Button -->
+          <a href="presupuesto.html" class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 bg-mustard hover:bg-yellow-400 rounded-full text-navy font-semibold text-xs md:text-sm transition shadow-md hover:shadow-lg">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            <span>Presupuesto</span>
+          </a>
+          <a href="presupuesto.html" class="p-2 hover:bg-white/10 rounded-full transition relative">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+            <span x-show="$store.budget.items.length > 0" x-text="$store.budget.items.length" class="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-mustard text-navy text-xs font-bold rounded-full flex items-center justify-center"></span>
+          </a>
+          <button class="p-2 hover:bg-white/10 rounded-full transition lg:hidden" @click="mobileProductsOpen = !mobileProductsOpen">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Search with Products Button -->
+      <div class="sm:hidden pb-4">
+        <div class="flex gap-2">
+          <!-- Mobile Products Button -->
+          <button @click="mobileProductsOpen = !mobileProductsOpen" class="flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white font-medium transition flex-shrink-0">
+            <span>Productos</span>
+            <svg class="w-4 h-4" :class="mobileProductsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <!-- Search -->
+          <div class="relative flex-1">
+            <input type="text" placeholder="Buscar..." class="w-full pl-10 pr-4 py-2.5 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mustard">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Products Drawer -->
+      <div x-show="mobileProductsOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[500px]" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 max-h-[500px]" x-transition:leave-end="opacity-0 max-h-0" class="sm:hidden overflow-hidden border-t border-white/10">
+        <div class="py-4 space-y-3">
+          <!-- Limpieza -->
+          <div class="border-b border-gray-700 pb-3">
+            <button @click="$el.parentElement.querySelector('.submenu').classList.toggle('hidden')" class="flex items-center justify-between w-full text-white font-semibold py-2">
+              <span class="flex items-center gap-2">
+                <span class="w-8 h-8 bg-mustard/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-4 h-4 text-mustard" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                </span>
+                Limpieza
+              </span>
+              <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <ul class="submenu hidden pl-10 mt-2 space-y-1">
+              <li><a href="catalog.html?cat=limpieza&sub=quimicos" class="text-gray-300 hover:text-mustard text-sm block py-1">Químicos y Desinfectantes</a></li>
+              <li><a href="catalog.html?cat=limpieza&sub=implementos" class="text-gray-300 hover:text-mustard text-sm block py-1">Implementos de Aseo</a></li>
+              <li><a href="catalog.html?cat=limpieza&sub=residuos" class="text-gray-300 hover:text-mustard text-sm block py-1">Manejo de Residuos</a></li>
+            </ul>
+          </div>
+          <!-- Oficina -->
+          <div class="border-b border-gray-700 pb-3">
+            <button @click="$el.parentElement.querySelector('.submenu').classList.toggle('hidden')" class="flex items-center justify-between w-full text-white font-semibold py-2">
+              <span class="flex items-center gap-2">
+                <span class="w-8 h-8 bg-navy/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </span>
+                Oficina
+              </span>
+              <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <ul class="submenu hidden pl-10 mt-2 space-y-1">
+              <li><a href="catalog.html?cat=oficina&sub=papel" class="text-gray-300 hover:text-mustard text-sm block py-1">Papel y Cuadernos</a></li>
+              <li><a href="catalog.html?cat=oficina&sub=escritura" class="text-gray-300 hover:text-mustard text-sm block py-1">Escritura y Corrección</a></li>
+              <li><a href="catalog.html?cat=oficina&sub=accesorios" class="text-gray-300 hover:text-mustard text-sm block py-1">Accesorios de Escritorio</a></li>
+              <li><a href="catalog.html?cat=oficina&sub=archivo" class="text-gray-300 hover:text-mustard text-sm block py-1">Organización y Archivo</a></li>
+              <li><a href="catalog.html?cat=oficina&sub=embalaje" class="text-gray-300 hover:text-mustard text-sm block py-1">Embalaje y Cintas</a></li>
+            </ul>
+          </div>
+          <!-- Higiene -->
+          <div class="pb-3">
+            <button @click="$el.parentElement.querySelector('.submenu').classList.toggle('hidden')" class="flex items-center justify-between w-full text-white font-semibold py-2">
+              <span class="flex items-center gap-2">
+                <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                </span>
+                Higiene
+              </span>
+              <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <ul class="submenu hidden pl-10 mt-2 space-y-1">
+              <li><a href="catalog.html?cat=higiene&sub=jabon" class="text-gray-300 hover:text-mustard text-sm block py-1">Jabón Líquido</a></li>
+              <li><a href="catalog.html?cat=higiene&sub=papel" class="text-gray-300 hover:text-mustard text-sm block py-1">Papel Higiénico</a></li>
+              <li><a href="catalog.html?cat=higiene&sub=toallas" class="text-gray-300 hover:text-mustard text-sm block py-1">Toallas de Papel</a></li>
+              <li><a href="catalog.html?cat=higiene&sub=dispensadores" class="text-gray-300 hover:text-mustard text-sm block py-1">Dispensadores</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (original) -->
+      <div id="mobileMenu" class="hidden sm:hidden pb-4 border-t border-white/10 pt-4">
+        <nav class="flex flex-col gap-1">
+          <a href="ecommerce-home.html" class="py-3 px-4 rounded-lg hover:bg-white/10 font-medium text-white">Inicio</a>
+          <a href="catalog.html" class="py-3 px-4 rounded-lg hover:bg-white/10 text-gray-300">Catálogo</a>
+          <a href="https://wa.me/584128550056" target="_blank" class="py-3 px-4 rounded-lg hover:bg-white/10 text-gray-300">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SLIDER - Full width with background images -->
+  <section class="relative overflow-hidden -mt-0" x-data="{ current: 0, slides: [
+    { title: 'Limpieza Profesional', subtitle: 'Químicos y desinfectantes para tu hogar o empresa', cta: 'Ver productos', link: 'catalog.html', bg: 'from-navy/95 to-navy/80', img: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?w=1920&q=80' },
+    { title: 'Vuelta al Cole', subtitle: 'Todo lo que necesitas para volver a clases', cta: 'Ver ofertas', link: 'catalog.html', bg: 'from-navy/90 to-black/60', img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=80' },
+    { title: 'Higiene Institucional', subtitle: 'Suministros para empresas y negocios', cta: 'Solicitar cotización', link: 'https://wa.me/584128550056?text=Hola,%20quiero%20solicitar%20un%20presupuesto', bg: 'from-slate/90 to-gray-900/80', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80' }
+  ], autoplay: null }" x-init="autoplay = setInterval(() => { current = (current + 1) % slides.length }, 5000)" @mouseenter="clearInterval(autoplay)" @mouseleave="autoplay = setInterval(() => { current = (current + 1) % slides.length }, 5000)">
+    <div class="w-full relative" style="min-height: 50vh; max-height: 80vh;">
+      <template x-for="(slide, index) in slides" :key="index">
+        <div x-show="current === index" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-105" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="absolute inset-0">
+          <!-- Background Image -->
+          <div class="absolute inset-0 bg-cover bg-center" :style="'background-image: url(' + slide.img + ')'"></div>
+          <!-- Gradient Overlay -->
+          <div :class="'bg-gradient-to-r ' + slide.bg" class="absolute inset-0"></div>
+          <!-- Content -->
+          <div class="relative w-full h-full flex items-center">
+            <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+              <div class="max-w-xl sm:max-w-2xl lg:max-w-3xl">
+                <p class="text-white/80 text-sm sm:text-base font-medium mb-2 sm:mb-3 uppercase tracking-wider" x-text="slide.title"></p>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-4 sm:mb-6 leading-tight" x-text="slide.subtitle"></h2>
+                <a :href="slide.link" class="bg-mustard hover:bg-yellow-400 text-navy px-6 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition inline-block" x-text="slide.cta"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- Dots -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+        <template x-for="(slide, index) in slides" :key="index">
+          <button @click="current = index" :class="current === index ? 'bg-white w-8' : 'bg-white/40 w-2'" class="h-2.5 rounded-full transition-all"></button>
+        </template>
+      </div>
+
+      <!-- Arrows -->
+      <button @click="current = (current - 1 + slides.length) % slides.length" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white/15 hover:bg-white/25 rounded-full flex items-center justify-center transition backdrop-blur-sm">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+<button @click="current = (current + 1) % slides.length" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white/15 hover:bg-white/25 rounded-full flex items-center justify-center transition backdrop-blur-sm">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- PASOS PARA ORDENAR -->
+  <section class="py-10 sm:py-14 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-navy mb-8 sm:mb-12">¿Cómo ordenar?</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div class="text-center">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-mustard text-navy rounded-full flex items-center justify-center mx-auto mb-4 text-xl sm:text-2xl font-bold">1</div>
+          <h3 class="font-semibold text-base sm:text-lg mb-1 text-navy">Selecciona</h3>
+          <p class="text-slate text-sm">Elige los productos que necesitas</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl sm:text-2xl font-bold">2</div>
+          <h3 class="font-semibold text-base sm:text-lg mb-1 text-navy">Confirma</h3>
+          <p class="text-slate text-sm">Revisa tu carrito y cantidades</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-mustard text-navy rounded-full flex items-center justify-center mx-auto mb-4 text-xl sm:text-2xl font-bold">3</div>
+          <h3 class="font-semibold text-base sm:text-lg mb-1 text-navy">Contacta</h3>
+          <p class="text-slate text-sm">Escríbenos por WhatsApp</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl sm:text-2xl font-bold">4</div>
+          <h3 class="font-semibold text-base sm:text-lg mb-1 text-navy">Recibe</h3>
+          <p class="text-slate text-sm">En tu casa o empresa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS DESTACADAS -->
+  <section id="categorias" class="py-10 sm:py-14 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-6 sm:mb-8">
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-navy">Categorías Destacadas</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+        <a href="catalog.html?cat=limpieza&sub=quimicos" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Químicos y Desinfectantes</span>
+        </a>
+        <a href="catalog.html?cat=limpieza&sub=implementos" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Implementos de Aseo</span>
+        </a>
+        <a href="catalog.html?cat=higiene" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Higiene Institucional</span>
+        </a>
+        <a href="catalog.html?cat=oficina&sub=papel" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Papel y Cuadernos</span>
+        </a>
+        <a href="catalog.html?cat=oficina&sub=accesorios" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Accesorios de Escritorio</span>
+        </a>
+        <a href="catalog.html?cat=oficina&sub=embalaje" class="bg-gray-50 hover:bg-mustard/10 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition group border border-gray-100">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-navy/5 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-mustard/20 transition">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <span class="font-semibold text-sm sm:text-base text-navy">Embalaje y Cintas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 MEJORES PRODUCTOS -->
+  <section id="productos" class="py-10 sm:py-14 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-6 sm:mb-8">
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-navy">Productos destacados</h2>
+        <a href="catalog.html" class="text-mustard font-semibold text-sm hover:underline">Ver catálogo completo</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+        <!-- Product 1 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=1" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=10" alt="Cloro" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Limpieza</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Cloro Galón 4L Premium</h3>
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <span class="text-lg font-bold text-navy">$4.50</span>
+                <span class="text-sm text-slate line-through ml-1">$5.25</span>
+              </div>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 1, name: 'Cloro Galón 4L Premium', price: 4.50, image: 'https://picsum.photos/400/400?random=10', categoryLabel: 'Limpieza > Químicos'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=31" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=11" alt="Resma" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Oficina</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Resma Papel Bond Carta 500h</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$6.99</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 31, name: 'Resma Papel Bond Carta 500h', price: 6.99, image: 'https://picsum.photos/400/400?random=11', categoryLabel: 'Oficina > Papel'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=14" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=12" alt="Mopa" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Limpieza</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Mopa Centrifugada Profesional</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$12.50</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 14, name: 'Mopa Centrifugada Profesional', price: 12.50, image: 'https://picsum.photos/400/400?random=12', categoryLabel: 'Limpieza > Implementos'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=49" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=13" alt="Grapadora" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Oficina</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Grapadora Metálica 50 hojas</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$8.75</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 49, name: 'Grapadora Metálica 50 hojas', price: 8.75, image: 'https://picsum.photos/400/400?random=13', categoryLabel: 'Oficina > Accesorios'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=66" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=14" alt="Jabón" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Higiene</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Jabón Líquido Manos 1L</h3>
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <span class="text-lg font-bold text-navy">$3.20</span>
+                <span class="text-sm text-slate line-through ml-1">$4.00</span>
+              </div>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 66, name: 'Jabón Líquido Manos 1L', price: 3.20, image: 'https://picsum.photos/400/400?random=14', categoryLabel: 'Higiene > Jabón'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=37" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=15" alt="Cinta" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Oficina</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Cinta Adhesiva Transparente 6pk</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$5.99</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 37, name: 'Cinta Adhesiva Transparente 6pk', price: 5.99, image: 'https://picsum.photos/400/400?random=15', categoryLabel: 'Oficina > Embalaje'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=13" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=16" alt="Escobas" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Limpieza</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Escoba Profesional Nylon</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$4.25</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 13, name: 'Escoba Profesional Nylon', price: 4.25, image: 'https://picsum.photos/400/400?random=16', categoryLabel: 'Limpieza > Implementos'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition group">
+          <a href="product-detail.html?id=41" class="block">
+          <div class="relative aspect-square bg-gray-100">
+            <img src="https://picsum.photos/400/400?random=17" alt="Bolígrafos" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4">
+            <p class="text-xs text-slate mb-1">Oficina</p>
+            <h3 class="font-semibold text-sm sm:text-base mb-3 text-navy">Pack 12 Bolígrafos Azules</h3>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-bold text-navy">$2.99</span>
+            </div>
+            <button @click.prevent="Alpine.store('budget').addItem({id: 41, name: 'Pack 12 Bolígrafos Azules', price: 2.99, image: 'https://picsum.photos/400/400?random=17', categoryLabel: 'Oficina > Escritura'}); alert('✓ Añadido al presupuesto')" class="w-full bg-mustard hover:bg-yellow-400 text-navy py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition">Añadir al presupuesto</button>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREFOOTER -->
+  <section class="py-10 sm:py-14 bg-navy">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">¿No encontraste lo que buscabas?</h2>
+        <p class="text-gray-300">Escríbenos por WhatsApp y te cotizamos tu pedido completo. También aceptamos transferencias y pagos locales.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://wa.me/584128550056" target="_blank" class="inline-flex items-center gap-3 bg-mustard hover:bg-yellow-400 text-navy font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span>Enviar mensaje por WhatsApp</span>
+        </a>
+      </div>
+      <div class="flex justify-center gap-6 mt-8">
+        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition">
+          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition">
+          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.26-.149-4.771-1.7-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85C.622 3.924 2.135 2.316 4.387 2.168c1.265-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.619-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate text-gray-300 py-10 sm:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.ibb.co/d4NY7WDd/image.png" alt="Multiservicios Teliz" class="h-10 w-auto object-contain">
+            <div>
+              <span class="font-bold text-lg text-white">Multiservicios</span>
+              <span class="font-bold text-lg text-mustard"> Teliz</span>
+            </div>
+          </div>
+          <p class="text-sm mb-2">Tu aliado en artículos de limpieza y oficina. Productos de calidad al mejor precio para hogares y empresas.</p>
+          <p class="text-sm font-semibold text-white">+58 412-8550056</p>
+          <p class="text-sm text-gray-400 mt-1">ventas@multiserviciosteliz.com</p>
+          <p class="text-sm text-gray-400 mt-1">RIF: J-50234567-8</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Productos</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="catalog.html?cat=limpieza" class="hover:text-mustard transition">Limpieza</a></li>
+            <li><a href="catalog.html?cat=higiene" class="hover:text-mustard transition">Higiene</a></li>
+            <li><a href="catalog.html?cat=oficina" class="hover:text-mustard transition">Oficina</a></li>
+            <li><a href="catalog.html" class="hover:text-mustard transition">Todos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Horarios</h4>
+          <ul class="space-y-2 text-sm">
+            <li><span class="text-white">Lun - Mar:</span> hasta medianoche</li>
+            <li><span class="text-white">Mié - Dom:</span> hasta 17:30</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Ubicación</h4>
+          <p class="text-sm">10 carrera sur entre 5ta y 7ma Calle Nte<br>El Tigre, Anzoátegui<br>Venezuela</p>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-700 pt-8 text-center">
+        <p class="text-sm">&copy; 2024 Multiservicios Teliz C.A. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+<!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/584128550056" target="_blank" class="fixed left-3 sm:left-6 bottom-6 sm:bottom-8 z-50 group">
+    <div class="relative">
+      <!-- Pulsing ring -->
+      <div class="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-30"></div>
+      <!-- Button -->
+      <div class="relative w-14 h-14 sm:w-16 sm:h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all transform hover:scale-110">
+        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+      </div>
+      <!-- Tooltip on hover -->
+      <div class="absolute left-full ml-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <div class="bg-gray-900 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap shadow-lg">
+          ¿Necesitas ayuda? Escríbenos
+          <div class="absolute right-full top-1/2 -translate-y-1/2 border-8 border-transparent border-r-gray-900"></div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('budget', {
+        items: JSON.parse(localStorage.getItem('budget_items') || '[]'),
+        discountPercent: 0,
+        get subtotal() { return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0) },
+        get discountAmount() { return this.subtotal * (this.discountPercent / 100) },
+        get total() { return this.subtotal - this.discountAmount },
+        _persist() { localStorage.setItem('budget_items', JSON.stringify(this.items)) },
+        addItem(product) {
+          const existing = this.items.find(item => item.id === product.id)
+          if (existing) { existing.quantity += 1 } else { this.items.push({...product, quantity: 1}) }
+          this._persist()
+        },
+        removeItem(id) { this.items = this.items.filter(item => item.id !== id); this._persist() },
+        updateQuantity(id, qty) { const item = this.items.find(item => item.id === id); if (item) { item.quantity = Math.max(1, qty); this._persist() } },
+        applyDiscount() { this.discountPercent = Math.min(100, Math.max(0, this.discountPercent || 0)) },
+        clearAll() { this.items = []; this.discountPercent = 0; this._persist() }
+      })
+    })
+  </script>
+</body>
+</html>
